@@ -1,7 +1,14 @@
 // db/initDb.js
-import { PGlite } from '@electric-sql/pglite';
+import { PGliteWorker } from '@electric-sql/pglite/worker'
 
-const db = new PGlite('idb://patient-db');
+const db = await PGliteWorker.create(
+  new Worker(new URL('./pglite-worker.js', import.meta.url), {
+    type: 'module',
+  }),
+  {
+    dataDir: 'idb://patient-db',
+  }
+)
 
 const initDb = async () => {
   await db.exec(`
@@ -13,7 +20,7 @@ const initDb = async () => {
       symptoms TEXT,
       registered_date TEXT DEFAULT CURRENT_TIMESTAMP
     )
-  `);
-};
+  `)
+}
 
-export { db, initDb };
+export { db, initDb }
