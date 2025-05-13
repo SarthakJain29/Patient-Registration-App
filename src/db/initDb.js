@@ -1,7 +1,7 @@
 // db/initDb.js
 import { PGlite } from '@electric-sql/pglite';
 
-const db = new PGlite();
+const db = new PGlite('idb://patient-db');
 
 const initDb = async () => {
   await db.exec(`
