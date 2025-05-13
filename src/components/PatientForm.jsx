@@ -25,9 +25,9 @@ const PatientForm = () => {
     const registered_date = new Date().toISOString();
 
     try {
-      await db.run(
+      await db.query(
         `INSERT INTO patients (name, age, gender, symptoms, registered_date)
-         VALUES (?, ?, ?, ?, ?)`,
+         VALUES ($1, $2, $3, $4, $5)`,
         [name, parseInt(age), gender, symptoms, registered_date]
       );
 
@@ -67,7 +67,7 @@ const PatientForm = () => {
       />
 
       <select name="gender" value={formData.gender} onChange={handleChange}>
-      <option value="" disabled hidden>Select your option</option>
+      <option value="" hidden>Select your option</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>

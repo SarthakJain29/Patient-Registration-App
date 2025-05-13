@@ -10,7 +10,13 @@ input, select, textarea, button {
   padding: 10px;
   font-size: 1rem;
 }
+button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
 
-select option[disabled] {
-  color: #888; 
+textarea {
+  font-size: 1rem;
 }

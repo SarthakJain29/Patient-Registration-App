@@ -6,7 +6,7 @@ const db = new PGlite();
 const initDb = async () => {
   await db.exec(`
     CREATE TABLE IF NOT EXISTS patients (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       age INTEGER NOT NULL,
       gender TEXT CHECK(gender IN ('Male', 'Female', 'Other')),
