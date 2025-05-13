@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../db/initDb';
+import { formatDate } from '../utils/format';
+
 
 const SQLConsole = () => {
   const [query, setQuery] = useState('SELECT * FROM patients;');
@@ -42,8 +44,10 @@ const SQLConsole = () => {
           <tbody>
             {result.map((row, idx) => (
               <tr key={idx}>
-                {Object.values(row).map((val, i) => (
-                  <td key={i}>{val?.toString()}</td>
+                {Object.entries(row).map(([key, val], i) => (
+                    <td key={i}>
+                        {key === 'registered_date' ? formatDate(val) : val?.toString()}
+                    </td>
                 ))}
               </tr>
             ))}

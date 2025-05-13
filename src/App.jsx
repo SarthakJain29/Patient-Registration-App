@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PatientForm from './components/PatientForm.jsx';
 import SQLConsole from './components/SqlConsole.jsx';
+import ViewPatients from './components/ViewPatients.jsx';
 import { initDb } from './db/initDb';
 import './app.css';
 
@@ -27,10 +28,12 @@ function App() {
       <div style={{ marginBottom: '1rem' }}>
         <button onClick={() => setView('form')}>Register Patient</button>
         <button onClick={() => setView('sql')}>SQL Query Console</button>
+        <button onClick={() => setView('view')}>View All Patients</button>
       </div>
 
       {view === 'form' && <PatientForm />}
       {view === 'sql' && <SQLConsole />}
+      {view === 'view' && <ViewPatients />}
     </div>
   );
 }
