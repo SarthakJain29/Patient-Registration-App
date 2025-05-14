@@ -1,12 +1,55 @@
-# React + Vite
+# 🏥 Patient Management System (PGlite + React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight browser-based Patient Management System that allows users to register patients and view all registered entries. Built with **React** and **PGlite**, this project requires **no backend or database setup**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+-  Registration Form : Register new patients with specific details.
+-  SQL Qeury Console : Write an Sql query to fetch required data.
+-  View Patient Data : Patient Data table with all the records stored.
+-  Data stored in browser memory using [@electric-sql/pglite]
+-  Persist patient data even after page refreshes 
+-  Multi-tab support: Usage across multiple tabs(in the same browser) and data sync by using Pglite-worker.
+-  Error-handling for failed submissions and fetches
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React (Vite)
+- **Database**: [PGlite](https://electric-sql.com/docs/pglite) – Browser-powered SQLite engine
+- **Styling**: Basic CSS (customizable)
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/SarthakJain29/Patient-Registration-App.git
+cd Patient-Registration-App
+
+### 2. Install Dependencies
+
+npm install
+
+### 3. Start Development Server
+
+npm run dev
+
+
+🧹 Troubleshooting
+❌ null value in column "id" error?
+
+Try resetting the schema by dropping the old table:
+
+await db.exec(`DROP TABLE IF EXISTS patients`);
+await db.exec(`CREATE TABLE IF NOT EXISTS patients (...)`);
+📌 Be careful — this deletes all previous data.
+
+
+For doubts or setup issues, feel free to raise an issue or contact me
