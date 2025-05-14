@@ -41,6 +41,7 @@ npm install
 ```bash
 npm run dev
 ```
+---
 
 ### 🧹 Troubleshooting
 ## ❌ null value in column "id" error?
@@ -53,4 +54,4 @@ await db.exec(`CREATE TABLE IF NOT EXISTS patients (...)`);
 📌 Be careful — this deletes all previous data.
 
 
-# For doubts or setup issues, feel free to raise an issue or contact me
+#### For doubts or setup issues, feel free to raise an issue or contact me
