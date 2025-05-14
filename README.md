@@ -1,56 +1,94 @@
-# 🏥 Patient Management System (PGlite + React)
+# Patient Registration App
 
-A lightweight browser-based Patient Management System that allows users to register patients and view all registered entries. Built with **React** and **PGlite**, this project requires **no backend or database setup**.
+A frontend-only patient registration application using PgLite for data storage. The app allows users to register new patients, query records using raw SQL, and persist patient data across page refreshes.
 
----
+## Features
 
-## 🚀 Features
+- Patient registration with form validation
+- View all registered patients in a table format
+- Execute raw SQL queries against the database
+- Data persistence across page refreshes
+- Synchronized data across multiple tabs
+- Modern, responsive UI using Tailwind CSS
 
--  Registration Form : Register new patients with specific details.
--  SQL Qeury Console : Write an Sql query to fetch required data.
--  View Patient Data : Patient Data table with all the records stored.
--  Data stored in browser memory using [@electric-sql/pglite]
--  Persist patient data even after page refreshes 
--  Multi-tab support: Usage across multiple tabs(in the same browser) and data sync by using Pglite-worker.
--  Error-handling for failed submissions and fetches
+## Tech Stack
 
+- React 18
+- Vite
+- PgLite for data storage
+- React Router for navigation
+- React Query for data synchronization
+- Tailwind CSS for styling
 
----
+## Setup Instructions
 
-## 🛠️ Tech Stack
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd patient-app
+   ```
 
-- **Frontend**: React (Vite)
-- **Database**: [PGlite](https://electric-sql.com/docs/pglite) – Browser-powered SQLite engine
-- **Styling**: Basic CSS (customizable)
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
----
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Getting Started
+4. Open your browser and navigate to `http://localhost:5173`
 
-### 1. Clone the Repository
+## Build and Deploy
 
-```bash
-git clone https://github.com/SarthakJain29/Patient-Registration-App.git
-cd Patient-Registration-App
-```
-### 2. Install Dependencies
-```bash
-npm install
-```
-### 3. Start Development Server
-```bash
-npm run dev
-```
----
-### 🧹 Troubleshooting
-## ❌ null value in column "id" error?
+1. Build the application:
+   ```bash
+   npm run build
+   ```
 
-Try resetting the schema by dropping the old table:
-```bash
-await db.exec(`DROP TABLE IF EXISTS patients`);
-await db.exec(`CREATE TABLE IF NOT EXISTS patients (...)`);
-```
-📌 Be careful — this deletes all previous data.
+2. Preview the production build:
+   ```bash
+   npm run preview
+   ```
 
+3. Deploy the contents of the `dist` directory to your preferred hosting platform (e.g., Vercel, Netlify)
 
-#### For doubts or setup issues, feel free to raise an issue or contact me
+## Usage
+
+1. **Patient Registration**
+   - Navigate to the home page
+   - Fill in the patient details form
+   - Click "Register Patient" to save the data
+
+2. **View Patients**
+   - Click on "Patient List" in the navigation
+   - View all registered patients in a table format
+   - Data is automatically sorted by registration date
+
+3. **SQL Query Interface**
+   - Click on "Query Interface" in the navigation
+   - Enter your SQL query in the text area
+   - Click "Run Query" to execute
+   - View results in a formatted table
+
+## Development Challenges
+
+1. **PgLite Integration**
+   - Implementing proper worker setup for PgLite
+   - Handling database initialization and connection management
+   - Ensuring data persistence across page refreshes
+
+2. **Cross-Tab Synchronization**
+   - Using React Query for automatic data synchronization
+   - Managing concurrent database access
+   - Handling stale data and cache invalidation
+
+3. **Build Configuration**
+   - Configuring Vite for proper worker bundling
+   - Setting up ESM modules for PgLite worker
+   - Optimizing build performance
+
+## License
+
+MIT

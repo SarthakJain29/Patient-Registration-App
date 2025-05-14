@@ -2,11 +2,9 @@
 import { PGlite } from '@electric-sql/pglite';
 import { worker } from '@electric-sql/pglite/worker';
 
-// This file is a Web Worker entry point. It should only contain this:
+// Initialize the worker with default configuration
 worker({
-  async init(options) {
-    return new PGlite({
-      dataDir: options.dataDir,
-    });
-  },
+  async init() {
+    return new PGlite();
+  }
 });

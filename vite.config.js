@@ -6,6 +6,18 @@ import topLevelAwait from 'vite-plugin-top-level-await';
 export default defineConfig({
   plugins: [react(), wasm(), topLevelAwait()],
   optimizeDeps: {
-    exclude: ['@electric-sql/pglite'],
+    exclude: ['@electric-sql/pglite']
   },
+  build: {
+    target: 'esnext'
+  },
+  worker: {
+    format: 'es'
+  },
+  server: {
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp'
+    }
+  }
 });

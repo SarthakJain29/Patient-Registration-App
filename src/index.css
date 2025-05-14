@@ -1,24 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f2f4f8;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
 input, select, textarea, button {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
 }
+
 textarea {
   resize: vertical;
   line-height: 1.5;
@@ -30,10 +37,54 @@ h1, h2, h3, h4, h5, h6 {
   color: #222;
   margin-top: 0;
 }
+
 a {
   color: #1a73e8;
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
+}
+
+.nav-link {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 ease-in-out;
+}
+
+.nav-link.active {
+  @apply bg-blue-500 text-white;
+}
+
+.nav-link:not(.active) {
+  @apply text-gray-600 hover:bg-blue-50 hover:text-blue-600;
+}
+
+.btn-primary {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium;
+}
+
+.input-field {
+  @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-lg p-6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blue-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-blue-500;
 }
