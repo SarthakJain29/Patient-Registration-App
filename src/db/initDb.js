@@ -19,8 +19,9 @@ const initDb = async () => {
       gender TEXT CHECK(gender IN ('Male', 'Female', 'Other')),
       symptoms TEXT,
       registered_date TEXT DEFAULT CURRENT_TIMESTAMP
-    )
-  `)
-}
+    );
+  `);
+};
+
 
 export { db, initDb }
