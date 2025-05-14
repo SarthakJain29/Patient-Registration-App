@@ -3,7 +3,7 @@ import PatientForm from './components/PatientForm.jsx';
 import SQLConsole from './components/SqlConsole.jsx';
 import ViewPatients from './components/ViewPatients.jsx';
 import { initDb } from './db/initDb';
-import './app.css';
+import './App.css';
 
 function App() {
   const [view, setView] = useState('form');
