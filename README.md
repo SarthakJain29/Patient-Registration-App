@@ -32,24 +32,25 @@ A lightweight browser-based Patient Management System that allows users to regis
 ```bash
 git clone https://github.com/SarthakJain29/Patient-Registration-App.git
 cd Patient-Registration-App
-
+```
 ### 2. Install Dependencies
-
+```bash
 npm install
-
+```
 ### 3. Start Development Server
-
+```bash
 npm run dev
+```
 
-
-🧹 Troubleshooting
-❌ null value in column "id" error?
+### 🧹 Troubleshooting
+## ❌ null value in column "id" error?
 
 Try resetting the schema by dropping the old table:
-
+```bash
 await db.exec(`DROP TABLE IF EXISTS patients`);
 await db.exec(`CREATE TABLE IF NOT EXISTS patients (...)`);
+```
 📌 Be careful — this deletes all previous data.
 
 
-For doubts or setup issues, feel free to raise an issue or contact me
+# For doubts or setup issues, feel free to raise an issue or contact me
