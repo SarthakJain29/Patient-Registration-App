@@ -23,13 +23,22 @@ function App() {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <h1>Patient Registration App</h1>
+      <div className="header">
+        <img
+          src="src/assets/undraw_medicine_hqqg.svg"
+          alt="Patient illustration"
+          style={{ width: '60px', marginRight: '1rem' }}
+        />
+        <h1>Patient Registration</h1>
+      </div>
 
-      <div style={{ marginBottom: '1rem' }}>
+
+      <div className="nav-buttons">
         <button onClick={() => setView('form')}>Register Patient</button>
         <button onClick={() => setView('sql')}>SQL Query Console</button>
         <button onClick={() => setView('view')}>View All Patients</button>
       </div>
+
 
       {view === 'form' && <PatientForm />}
       {view === 'sql' && <SQLConsole />}

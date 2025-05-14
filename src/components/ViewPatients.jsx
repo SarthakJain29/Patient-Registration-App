@@ -19,13 +19,42 @@ const ViewPatients = () => {
     fetchPatients();
   }, []);
 
+  const handleExport = () => {
+    const blob = new Blob([JSON.stringify(patients, null, 2)], {
+      type: 'application/json',
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'patients-export.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if (patients.length === 0) return <p>No patients found.</p>;
 
   return (
     <div>
       <h2>All Registered Patients</h2>
-      <table border="1" style={{ marginTop: '1rem', width: '100%' }}>
-        <thead>
+
+      <button
+        onClick={handleExport}
+        style={{
+          margin: '1rem 0',
+          padding: '10px 20px',
+          backgroundColor: '#10b981',
+          color: 'white',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          fontWeight: '500',
+        }}
+      >
+        Export DB
+      </button>
+
+      <table border="1" style={{ marginTop: '1rem', width: '100%', borderCollapse: 'collapse' }}>
+        <thead style={{ backgroundColor: '#f1f5f9' }}>
           <tr>
             <th>ID</th>
             <th>Name</th>

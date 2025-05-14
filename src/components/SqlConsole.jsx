@@ -22,15 +22,18 @@ const SQLConsole = () => {
   return (
     <div>
       <h2>SQL Query Console</h2>
-      <textarea
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Enter SQL query here"
-        rows={5}
-        cols={50}
-      />
-      <br />
-      <button onClick={runQuery}>Run Query</button>
+      <div className='query-console'>
+        <textarea
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Enter SQL query here"
+          rows={5}
+          cols={50}
+        />
+        <br />
+        <button type="submit" onClick={runQuery}>Run Query</button>
+      </div>
+      
 
       {result.length > 0 && (
         <table border="1" style={{ marginTop: '1rem' }}>

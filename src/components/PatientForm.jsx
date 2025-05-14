@@ -66,12 +66,18 @@ const PatientForm = () => {
         required
       />
 
-      <select name="gender" value={formData.gender} onChange={handleChange}>
-      <option value="" hidden>Select your option</option>
+      <select
+        name="gender"
+        value={formData.gender}
+        onChange={handleChange}
+        className={formData.gender === '' ? 'placeholder' : ''}
+      >
+        <option value="" disabled hidden>Select your option</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>
       </select>
+
 
       <textarea
         name="symptoms"
