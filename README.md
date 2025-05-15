@@ -16,8 +16,6 @@ A frontend-only patient registration application using PgLite for data storage. 
 - React 18
 - Vite
 - PgLite for data storage
-- React Router for navigation
-- React Query for data synchronization
 - Tailwind CSS for styling
 
 ## Setup Instructions
@@ -52,43 +50,32 @@ A frontend-only patient registration application using PgLite for data storage. 
    npm run preview
    ```
 
-3. Deploy the contents of the `dist` directory to your preferred hosting platform (e.g., Vercel, Netlify)
-
 ## Usage
 
 1. **Patient Registration**
-   - Navigate to the home page
    - Fill in the patient details form
    - Click "Register Patient" to save the data
 
 2. **View Patients**
    - Click on "Patient List" in the navigation
    - View all registered patients in a table format
-   - Data is automatically sorted by registration date
 
 3. **SQL Query Interface**
    - Click on "Query Interface" in the navigation
    - Enter your SQL query in the text area
-   - Click "Run Query" to execute
-   - View results in a formatted table
+   - Click "Run Query" and view results in a table format
 
-## Development Challenges
+## Challenges Faced During Development
 
-1. **PgLite Integration**
-   - Implementing proper worker setup for PgLite
-   - Handling database initialization and connection management
-   - Ensuring data persistence across page refreshes
+**Using PGlite with Vite:** 
+Setting up PGlite in a Vite + React app required extra configuration to handle Web Workers and WebAssembly. I had to use plugins like vite-plugin-wasm and vite-plugin-top-level-await and adjust the Vite config for compatibility.
 
-2. **Cross-Tab Synchronization**
-   - Using React Query for automatic data synchronization
-   - Managing concurrent database access
-   - Handling stale data and cache invalidation
+**Build Issues:** 
+While the app worked fine in development, getting it to build for production (using npm run build) caused errors due to module format and dependency optimization. Fixing these required tweaking build settings and excluding PGlite from Vite's optimization.
 
-3. **Build Configuration**
-   - Configuring Vite for proper worker bundling
-   - Setting up ESM modules for PgLite worker
-   - Optimizing build performance
+**Persistence and Multi-Tab Support:** 
+Making the database persistent with IndexedDB and ensuring data synced across tabs was tricky. I implemented a custom event-based sync using localStorage and CustomEvent.
 
-## License
-
-MIT
+### Resources/References
+https://pglite.dev/docs/
+https://react.dev/
