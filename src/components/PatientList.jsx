@@ -5,85 +5,54 @@ const PatientList = () => {
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [db, setDb] = useState(null);
 
-  useEffect(() => {
-    const initializeDb = async () => {
-      try {
-        const dbInstance = await getDb();
-        setDb(dbInstance);
-        await fetchPatients(dbInstance);
-      } catch (err) {
-        setError('Failed to initialize database');
-        setLoading(false);
-      }
-    };
-    initializeDb();
-  }, []);
-
-  const fetchPatients = async (dbInstance) => {
+  const fetchPatients = async () => {
     try {
-      const result = await dbInstance.query('SELECT * FROM patients ORDER BY registered_date DESC');
+      setLoading(true);
+      const db = await getDb();
+      const result = await db.query('SELECT * FROM patients ORDER BY registered_date DESC');
       setPatients(result.rows);
-      setLoading(false);
+      setError(null);
     } catch (err) {
       setError('Failed to fetch patients');
+    } finally {
       setLoading(false);
     }
   };
 
-  if (loading) {
-    return <div className="text-center py-8">Loading...</div>;
-  }
+  useEffect(() => {
+    fetchPatients();
+    window.addEventListener('patient_db_updated', fetchPatients);
+    return () => window.removeEventListener('patient_db_updated', fetchPatients);
+  }, []);
 
-  if (error) {
-    return <div className="text-center py-8 text-red-600">{error}</div>;
-  }
+  if (loading) return <div className="flex justify-center items-center py-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div></div>;
+  if (error) return <div className="text-center py-8"><div className="text-red-600 mb-2">{error}</div><button onClick={fetchPatients} className="text-blue-500 hover:text-blue-700 underline">Try Again</button></div>;
 
   return (
-    <div className="bg-white shadow rounded-lg overflow-hidden">
-      <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">
-          Registered Patients
-        </h3>
-      </div>
-      <div className="border-t border-gray-200">
+    <div className="space-y-6">
+      <h2 className="text-2xl font-semibold text-gray-900">Patient List</h2>
+      {patients.length === 0 ? (
+        <p className="text-center text-gray-500">No patients registered yet.</p>
+      ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Age
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Gender
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Symptoms
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Registered Date
-                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Symptoms</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registered Date</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {patients.map((patient) => (
-                <tr key={patient.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {patient.name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {patient.age}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {patient.gender}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
-                    {patient.symptoms}
-                  </td>
+                <tr key={patient.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{patient.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.age}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.gender}</td>
+                  <td className="px-6 py-4 whitespace-wrap text-sm text-gray-500">{patient.symptoms}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {new Date(patient.registered_date).toLocaleString()}
                   </td>
@@ -92,7 +61,7 @@ const PatientList = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      )}
     </div>
   );
 };
